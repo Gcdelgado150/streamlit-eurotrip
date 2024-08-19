@@ -3,6 +3,3 @@ base="dark"
 
 [client]
 showSidebarNavigation = false
-
-[browser]
-showSidebarNavigation = false
