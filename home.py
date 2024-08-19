@@ -24,6 +24,9 @@ df.loc[df["Destination"] == "Madrid", ["Start_Date"]] = f"2024-10-07 {transform_
 df.loc[df["Destination"] == "Madrid", ["End_Date"]] = f"2024-10-07 {transform_hour(df.loc[df['Destination'] == 'Madrid', ['Saida']].values[0])}:00:00"
 df.loc[df["Destination"] == "Roma", ["Start_Date"]] = f"2024-10-07 {transform_hour(df.loc[df['Destination'] == 'Roma', ['Chegada']].values[0])}:35:00"
 
+df.loc[df["Destination"] == "Veneza", ["Start_Date"]] = f"2024-10-07 {transform_hour(df.loc[df['Destination'] == 'Veneza', ['Chegada']].values[0])}:35:00"
+df.loc[df["Destination"] == "Veneza", ["End_Date"]] = f"2024-10-07 {transform_hour(df.loc[df['Destination'] == 'Veneza', ['Saida']].values[0])}:00:00"
+
 date = datetime.now()
 order_country = df.Destination.tolist()
 
