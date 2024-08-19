@@ -4,7 +4,7 @@ from helpers import create_sidebar
 import plotly.express as px
 
 def plot_pie_gastos(df, country):
-    fig = px.pie(df, values='Gastos_por_pessoa', names='Lugar', title=f'Gastos por pessoa em {country}')
+    fig = px.pie(df, values='Gastos_por_pessoa', names='Lugar', title=f'Gastos por pessoa em {country.capitalize()}')
     st.plotly_chart(fig, use_container_width=True)
 
 def plot_pie_gastos_por_categoria(df):
