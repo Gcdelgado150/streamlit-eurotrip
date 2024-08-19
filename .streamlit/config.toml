@@ -2,4 +2,4 @@
 base="dark"
 
 [client]
-showSidebarNavigation = False
+showSidebarNavigation = false
