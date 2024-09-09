@@ -4,36 +4,31 @@ import pandas as pd
 import plotly.express as px
 import datetime
 from datetime import datetime
+import os
 
-def transform_hour(ser):
-    if ser >= 10:
-        return f"{int(ser)}"
-    else:
-        return f"0{int(ser)}"
     
 st.set_page_config(layout="wide")
-
 create_sidebar()
 
 df = pd.read_csv("data/roteiro.csv")
 df['Start_Date'] = pd.to_datetime(df['Start_Date'])
 df['End_Date'] = pd.to_datetime(df['End_Date'])
 
-# Edit arrival times
-df.loc[df["Destination"] == "Madrid", ["Start_Date"]] = f"2024-10-07 {transform_hour(df.loc[df['Destination'] == 'Madrid', ['Chegada']].values[0])}:00:00"
-df.loc[df["Destination"] == "Madrid", ["End_Date"]] = f"2024-10-07 {transform_hour(df.loc[df['Destination'] == 'Madrid', ['Saida']].values[0])}:00:00"
-df.loc[df["Destination"] == "Roma", ["Start_Date"]] = f"2024-10-07 {transform_hour(df.loc[df['Destination'] == 'Roma', ['Chegada']].values[0])}:35:00"
-
-df.loc[df["Destination"] == "Veneza", ["Start_Date"]] = f"2024-10-12 {transform_hour(df.loc[df['Destination'] == 'Veneza', ['Chegada']].values[0])}:35:00"
-df.loc[df["Destination"] == "Veneza", ["End_Date"]] = f"2024-10-12 {transform_hour(df.loc[df['Destination'] == 'Veneza', ['Saida']].values[0])}:00:00"
-
 date = datetime.now()
-order_country = df.Destination.tolist()
-
 days_left = (df.loc[0, "Start_Date"] - date).days
 if days_left >= 0:
     st.markdown(f"<p style='font-size: 24px; color: white; font-weight: bold;'>Faltam <span style='color: red;'>{days_left}</span> dias para a viagem.</p>", unsafe_allow_html=True)
 
+order_country = df.Destination.tolist()
+
+for i, row in df.iterrows():    
+    # Combine Start_Date and Chegada
+    new_start_date = f"{row['Start_Date']} {row['Chegada']}"
+    new_end_date = f"{row['End_Date']} {row['Saida']}"
+    
+    # Update the DataFrame for the current row
+    df.loc[i, 'Start_Date'] = new_start_date
+    df.loc[i, "End_Date"] = new_end_date
 
 # Interactive Timeline Visualization
 if not df.empty:
@@ -49,8 +44,7 @@ if not df.empty:
     fig.update_yaxes(categoryorder="array", categoryarray=order_country)
     fig.add_vline(x=date, line_width=3, line_color="black")
     st.plotly_chart(fig)
-
-import os
+st.divider()
 all_dfs = []
 for page in os.listdir("pages"):
     df = pd.read_excel("data/each_place.ods", engine="odf", sheet_name=page.split(".")[0])
@@ -58,12 +52,18 @@ for page in os.listdir("pages"):
 
 all_dfs = pd.concat(all_dfs)
 plot_pie_gastos_por_categoria(all_dfs)
-col_pago, col_npago = st.columns(2)
-with col_pago:
-    total_pago_porpessoa(all_dfs)
-with col_npago:
-    total_npago_porpessoa(all_dfs)
-total_estimado(all_dfs)
-bar_plot_paid(all_dfs)
+st.divider()
 
-    # st.write()
+col_pago, col_npago, col_estimado = st.columns(3)
+with col_pago:
+    with st.container(border=True):
+        total_pago_porpessoa(all_dfs)
+with col_npago:
+    with st.container(border=True):
+        total_npago_porpessoa(all_dfs)
+with col_estimado:
+    with st.container(border=True):
+        total_estimado(all_dfs)
+
+st.divider()
+bar_plot_paid(all_dfs)

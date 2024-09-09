@@ -5,7 +5,8 @@ import os
 
 def create_sidebar():
     # Clear the sidebar
-    st.sidebar.title("Eurotrip")
+    st.sidebar.image("data/logo.png")
+    # st.sidebar.title("Eurotrip")
     st.sidebar.page_link("home.py", label="Visão Geral") 
     st.sidebar.page_link("pages/rome.py", label="Roma")
     st.sidebar.page_link("pages/florence.py", label="Florença")
