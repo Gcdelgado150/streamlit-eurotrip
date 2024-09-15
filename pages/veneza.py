@@ -12,3 +12,7 @@ plot_pie_gastos(df, country=country)
 print_status(df)
 
 
+st.divider()
+with st.expander("DIA 1 (12/10)"):
+    st.write("""""")
+
