@@ -14,26 +14,30 @@ plot_pie_gastos(df, country=country)
 
 print_status(df)
 
+with st.expander("DIA 1 - (16/10)"):
+    st.write("""
+        - Chegada 09:25
+        - Chegar no hotel e deixar as malas (11hrs)
+        - Ir ao Trocadero 
+        - Torre Eiffel
+        - Hôtel des Invalides
+        - Ponte Alexandre III
+        - Arco do Triunfo
+        - Voltar ao hotel, tomar banho
+        - Voltar e Jantar vendo as luzes  da Torre Eiffel
+        """)
+    
+with st.expander("DIA 2 - (17/10)"):
+    st.write("""
+            - Palacio de Versalles
+            - Louvre
+            - Ir para Montmartre ( Moulin Rouge e Sacre Cour)
+            - Galerias Lafayete
+             """)
 
-st.write("Roteiro")
 
-st.write("""DIA 1
-Chegar no hotel e deixar as malas
-Ir ao Trocadero e no Campo de Marte para ver Torre Eiffel
-Almoçar perto da Ponte Alexandre III
-Voltar ao hotel, tomar banho
-Ir para Montmartre ( Moulin Rouge e Sacre Cour)
-Voltar e ver as luzes da Torre Eiffel
-Jantar vendo as luzes 
-
-DIA 2
-Palacio de Versalles
-Louvre
-Notre Dame
-
-
-DIA 3
-Galerias Lafayete
-Arco do Triunfo
-Pegar trem para Londres 
-""")
+with st.expander("DIA 3 - (18/10)"):
+    st.write("""
+            - Notre Dame
+            - Pegar trem para Londres 
+            """)

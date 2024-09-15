@@ -57,6 +57,11 @@ with st.expander("DIA 5 - TOSCANA (15/10)"):
         - Montalcino
         - volta para Florença
         """)
+       
+with st.expander("DIA 6 - Saída Florença (16/10)"):
+    st.write("""
+        - Voo 07:35am
+        """)
     
     
 st.write("Seguir para :")
